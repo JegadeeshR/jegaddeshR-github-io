@@ -1,20 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>R Jegadeesh Kumar — QA Automation Engineer & SDET</title>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500;600&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <!-- FontAwesome for crisp vectors -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
+
   <!-- Three.js for 3D Interactive Background & Polyhedral Object -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 
@@ -50,13 +53,16 @@
     ::-webkit-scrollbar {
       width: 7px;
     }
+
     ::-webkit-scrollbar-track {
       background: #07080a;
     }
+
     ::-webkit-scrollbar-thumb {
       background: #1f2430;
       border-radius: 9999px;
     }
+
     ::-webkit-scrollbar-thumb:hover {
       background: #38bdf8;
     }
@@ -64,7 +70,7 @@
     /* Ambient background noise/grid */
     .bg-grid-pattern {
       background-size: 50px 50px;
-      background-image: 
+      background-image:
         linear-gradient(to right, rgba(255, 255, 255, 0.025) 1px, transparent 1px),
         linear-gradient(to bottom, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
     }
@@ -77,11 +83,11 @@
       left: 0;
       z-index: 9999;
       transform: translate(-50%, -50%);
-      transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
-                  height 0.25s cubic-bezier(0.16, 1, 0.3, 1), 
-                  background-color 0.25s ease,
-                  border-color 0.25s ease,
-                  transform 0.08s ease-out;
+      transition: width 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        height 0.25s cubic-bezier(0.16, 1, 0.3, 1),
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        transform 0.08s ease-out;
     }
 
     /* Magnetic interactive tilt wrapper */
@@ -93,14 +99,21 @@
 
     /* Ticker marquee animation */
     @keyframes marquee {
-      0% { transform: translateX(0%); }
-      100% { transform: translateX(-50%); }
+      0% {
+        transform: translateX(0%);
+      }
+
+      100% {
+        transform: translateX(-50%);
+      }
     }
+
     .animate-ticker {
       display: flex;
       width: 200%;
       animation: marquee 28s linear infinite;
     }
+
     .animate-ticker:hover {
       animation-play-state: paused;
     }
@@ -111,6 +124,7 @@
       border: 1px solid rgba(255, 255, 255, 0.08);
       backdrop-filter: blur(8px);
     }
+
     .badge-pill:hover {
       border-color: rgba(56, 189, 248, 0.4);
       background: rgba(56, 189, 248, 0.05);
@@ -119,7 +133,7 @@
     /* Terminal scanline effect */
     .terminal-screen {
       background: radial-gradient(circle at 50% 0%, #171b26, #090a0f 85%);
-      box-shadow: inset 0 0 20px rgba(0,0,0,0.8), 0 20px 40px -15px rgba(0,0,0,0.7);
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 20px 40px -15px rgba(0, 0, 0, 0.7);
     }
 
     /* Hide cursor for mobile touch */
@@ -131,38 +145,52 @@
   </style>
 </head>
 
-<body class="bg-[#07080a] text-slate-200 font-sans selection:bg-sky-500 selection:text-black overflow-x-hidden relative min-h-screen">
+<body
+  class="bg-[#07080a] text-slate-200 font-sans selection:bg-sky-500 selection:text-black overflow-x-hidden relative min-h-screen">
 
-  <div id="cursor-dot" class="custom-cursor w-2.5 h-2.5 bg-sky-400 rounded-full mix-blend-screen opacity-90 hidden md:block"></div>
-  <div id="cursor-circle" class="custom-cursor w-8 h-8 rounded-full border border-sky-400/40 mix-blend-screen opacity-70 hidden md:block transition-all duration-150"></div>
+  <div id="cursor-dot"
+    class="custom-cursor w-2.5 h-2.5 bg-sky-400 rounded-full mix-blend-screen opacity-90 hidden md:block"></div>
+  <div id="cursor-circle"
+    class="custom-cursor w-8 h-8 rounded-full border border-sky-400/40 mix-blend-screen opacity-70 hidden md:block transition-all duration-150">
+  </div>
 
   <div id="canvas-container" class="fixed inset-0 pointer-events-none z-0 opacity-60"></div>
 
   <!-- Ambient Light Orbs -->
-  <div class="fixed top-[-10vw] left-[20vw] w-[45vw] h-[45vw] bg-sky-500/10 rounded-full blur-[140px] pointer-events-none z-0"></div>
-  <div class="fixed bottom-[10vw] right-[10vw] w-[40vw] h-[40vw] bg-indigo-600/10 rounded-full blur-[160px] pointer-events-none z-0"></div>
+  <div
+    class="fixed top-[-10vw] left-[20vw] w-[45vw] h-[45vw] bg-sky-500/10 rounded-full blur-[140px] pointer-events-none z-0">
+  </div>
+  <div
+    class="fixed bottom-[10vw] right-[10vw] w-[40vw] h-[40vw] bg-indigo-600/10 rounded-full blur-[160px] pointer-events-none z-0">
+  </div>
 
-  <header class="fixed top-0 left-0 right-0 z-50 px-5 md:px-12 py-5 backdrop-blur-md bg-[#07080a]/60 border-b border-white/[0.05] transition-all duration-300" id="main-header">
+  <header
+    class="fixed top-0 left-0 right-0 z-50 px-5 md:px-12 py-5 backdrop-blur-md bg-[#07080a]/60 border-b border-white/[0.05] transition-all duration-300"
+    id="main-header">
     <div class="max-w-7xl mx-auto flex items-center justify-between">
-      
+
       <!-- Logo / Name Identifier -->
       <a href="#hero" class="group flex items-center gap-3">
-        <div class="w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center font-bold text-black text-sm tracking-wider font-display shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
+        <div
+          class="w-9 h-9 rounded-xl bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center font-bold text-black text-sm tracking-wider font-display shadow-lg shadow-sky-500/20 group-hover:scale-105 transition-transform">
           JK
         </div>
         <div class="flex flex-col">
-          <span class="font-display font-bold text-sm tracking-wide text-white group-hover:text-sky-400 transition-colors">R JEGADEESH KUMAR</span>
+          <span
+            class="font-display font-bold text-sm tracking-wide text-white group-hover:text-sky-400 transition-colors">R
+            JEGADEESH KUMAR</span>
           <span class="font-mono text-[10px] tracking-wider text-slate-400 uppercase">QA & SDET AUTOMATION</span>
         </div>
       </a>
 
       <!-- Status badge (Marcus Lorenzet style) -->
-      <div class="hidden lg:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs font-mono text-slate-300">
+      <div
+        class="hidden lg:flex items-center gap-2.5 px-3.5 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.08] text-xs font-mono text-slate-300">
         <span class="relative flex h-2 w-2">
           <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
           <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
         </span>
-        <span>OPEN FOR QA & AUTOMATION ROLES</span>
+        <span>OPEN FOR QA & AUTOMATIONs ROLES</span>
       </div>
 
       <!-- Nav Links & Call To Action -->
@@ -174,7 +202,8 @@
           <a href="#experience" class="hover:text-sky-400 transition-colors">/ TIMELINE</a>
         </div>
 
-        <a href="#contact" class="relative group overflow-hidden px-4 md:px-5 py-2 rounded-full border border-sky-400/40 text-xs font-mono font-medium tracking-wider text-white bg-sky-500/10 hover:bg-sky-400 hover:text-black transition-all duration-300 shadow-sm shadow-sky-400/20">
+        <a href="#contact"
+          class="relative group overflow-hidden px-4 md:px-5 py-2 rounded-full border border-sky-400/40 text-xs font-mono font-medium tracking-wider text-white bg-sky-500/10 hover:bg-sky-400 hover:text-black transition-all duration-300 shadow-sm shadow-sky-400/20">
           <span class="relative z-10 flex items-center gap-2">
             <span>GET IN TOUCH</span>
             <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
@@ -187,7 +216,7 @@
   <main class="relative z-10 pt-28 md:pt-36">
     <section id="hero" class="min-h-[85vh] flex items-center px-5 md:px-12 max-w-7xl mx-auto">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center w-full">
-        
+
         <!-- Left Column: Impactful typography & action triggers -->
         <div class="lg:col-span-7 flex flex-col space-y-6">
           <div class="inline-flex items-center gap-2 font-mono text-xs text-sky-400 tracking-wider">
@@ -196,12 +225,18 @@
             <span class="text-slate-400">MCA GRADUATE</span>
           </div>
 
-          <h1 class="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-display font-extrabold tracking-tight text-white leading-[1.08]">
-            Architecting <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-teal-300 to-indigo-400">bulletproof</span> test pipelines & zero-flake suites.
+          <h1
+            class="text-4xl sm:text-5xl md:text-6xl xl:text-7xl font-display font-extrabold tracking-tight text-white leading-[1.08]">
+            Architecting <span
+              class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-teal-300 to-indigo-400">bulletproof</span>
+            test pipelines & zero-flake suites.
           </h1>
 
           <p class="text-slate-400 text-base md:text-lg max-w-2xl leading-relaxed font-light">
-            Hey, I'm <strong class="text-white font-medium">Jegadeesh</strong>. I transform intricate user workflows and distributed web architectures into resilient, high-speed automated regression frameworks using <span class="text-sky-300">Playwright</span>, <span class="text-sky-300">Selenium</span>, and <span class="text-sky-300">Python</span>.
+            Hey, I'm <strong class="text-white font-medium">Jegadeesh</strong>. I transform intricate user workflows and
+            distributed web architectures into resilient, high-speed automated regression frameworks using <span
+              class="text-sky-300">Playwright</span>, <span class="text-sky-300">Selenium</span>, and <span
+              class="text-sky-300">Python</span>.
           </p>
 
           <!-- Quick Metrics Bar -->
@@ -226,20 +261,24 @@
 
           <!-- CTA Buttons & Direct Links -->
           <div class="flex flex-wrap items-center gap-4 pt-4">
-            <a href="#projects" class="px-6 py-3.5 rounded-full bg-white text-black font-semibold text-xs tracking-wider uppercase hover:bg-sky-400 hover:text-black transition-all duration-300 flex items-center gap-2 shadow-lg shadow-white/10">
+            <a href="#projects"
+              class="px-6 py-3.5 rounded-full bg-white text-black font-semibold text-xs tracking-wider uppercase hover:bg-sky-400 hover:text-black transition-all duration-300 flex items-center gap-2 shadow-lg shadow-white/10">
               <span>EXPLORE AUTOMATION SUITES</span>
               <i class="fa-solid fa-chevron-down text-xs"></i>
             </a>
 
-            <button onclick="openConsoleRunner()" class="px-5 py-3.5 rounded-full border border-white/20 bg-white/[0.03] hover:bg-white/[0.08] text-white text-xs font-mono tracking-wider transition-all duration-300 flex items-center gap-2">
+            <button onclick="openConsoleRunner()"
+              class="px-5 py-3.5 rounded-full border border-white/20 bg-white/[0.03] hover:bg-white/[0.08] text-white text-xs font-mono tracking-wider transition-all duration-300 flex items-center gap-2">
               <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
               <span>SIMULATE TEST RUNNER</span>
             </button>
 
-            <a href="https://github.com/JegadeeshR" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full border border-white/15 flex items-center justify-center text-slate-300 hover:text-white hover:border-sky-400 transition-colors">
+            <a href="https://github.com/JegadeeshR" target="_blank" rel="noopener noreferrer"
+              class="w-11 h-11 rounded-full border border-white/15 flex items-center justify-center text-slate-300 hover:text-white hover:border-sky-400 transition-colors">
               <i class="fa-brands fa-github text-base"></i>
             </a>
-            <a href="https://www.linkedin.com/in/jegadeesh-kumar-2a8629221" target="_blank" rel="noopener noreferrer" class="w-11 h-11 rounded-full border border-white/15 flex items-center justify-center text-slate-300 hover:text-white hover:border-sky-400 transition-colors">
+            <a href="https://www.linkedin.com/in/jegadeesh-kumar-2a8629221" target="_blank" rel="noopener noreferrer"
+              class="w-11 h-11 rounded-full border border-white/15 flex items-center justify-center text-slate-300 hover:text-white hover:border-sky-400 transition-colors">
               <i class="fa-brands fa-linkedin-in text-base"></i>
             </a>
           </div>
@@ -249,55 +288,63 @@
         <!-- Right Column: Marcus Lorenzet style photo frame with tech floating pills -->
         <div class="lg:col-span-5 flex justify-center">
           <div class="relative w-full max-w-[380px] sm:max-w-[420px] aspect-[4/5] group">
-            
+
             <!-- Glow background -->
-            <div class="absolute -inset-2 bg-gradient-to-r from-sky-500/30 to-indigo-500/20 rounded-3xl blur-2xl opacity-60 group-hover:opacity-90 transition duration-700"></div>
+            <div
+              class="absolute -inset-2 bg-gradient-to-r from-sky-500/30 to-indigo-500/20 rounded-3xl blur-2xl opacity-60 group-hover:opacity-90 transition duration-700">
+            </div>
 
             <!-- Card container with subtle border -->
-            <div class="relative w-full h-full rounded-2xl overflow-hidden border border-white/15 bg-brand-card shadow-2xl">
-              
+            <div
+              class="relative w-full h-full rounded-2xl overflow-hidden border border-white/15 bg-brand-card shadow-2xl">
+
               <!-- Actual User Image with responsive fallback -->
-              <img 
-                src="IMG_5745.jpg" 
-                alt="R Jegadeesh Kumar - QA Automation Tester" 
+              <img src="IMG_5745.jpg" alt="R Jegadeesh Kumar - QA Automation Tester"
                 class="w-full h-full object-cover object-top filter grayscale contrast-110 group-hover:grayscale-0 group-hover:scale-105 transition-all duration-700 ease-out"
-                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80';"
-              />
+                onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=800&q=80';" />
 
               <!-- Overlay Gradient for contrast -->
-              <div class="absolute inset-0 bg-gradient-to-t from-[#07080a] via-transparent to-transparent opacity-80 pointer-events-none"></div>
+              <div
+                class="absolute inset-0 bg-gradient-to-t from-[#07080a] via-transparent to-transparent opacity-80 pointer-events-none">
+              </div>
 
               <!-- Floating badges (Marcus Lorenzet 3D card style) -->
-              <div class="absolute bottom-5 left-5 right-5 p-4 rounded-xl backdrop-blur-md bg-black/60 border border-white/10 flex items-center justify-between">
+              <div
+                class="absolute bottom-5 left-5 right-5 p-4 rounded-xl backdrop-blur-md bg-black/60 border border-white/10 flex items-center justify-between">
                 <div>
                   <h4 class="text-white font-display font-semibold text-sm">R Jegadeesh kumar</h4>
                   <p class="text-xs text-sky-400 font-mono">QA Engineer & Automation Architect</p>
                 </div>
                 <div class="flex gap-2">
-                  <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-xs text-white" title="Playwright">
+                  <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-xs text-white"
+                    title="Playwright">
                     <i class="fa-solid fa-vial-circle-check"></i>
                   </span>
-                  <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-xs text-sky-400" title="Python">
+                  <span class="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-xs text-sky-400"
+                    title="Python">
                     <i class="fa-brands fa-python"></i>
                   </span>
                 </div>
               </div>
 
               <!-- Top right active status chip -->
-              <div class="absolute top-4 right-4 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-[11px] font-mono text-emerald-400 flex items-center gap-1.5">
+              <div
+                class="absolute top-4 right-4 px-3 py-1 rounded-full bg-black/70 backdrop-blur-md border border-white/10 text-[11px] font-mono text-emerald-400 flex items-center gap-1.5">
                 <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
                 <span>VERIFIED STLC</span>
               </div>
             </div>
 
             <!-- Floating external tag 1 -->
-            <div class="absolute -top-4 -left-6 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#0e111a]/90 backdrop-blur border border-white/10 shadow-lg text-[11px] font-mono text-slate-300">
+            <div
+              class="absolute -top-4 -left-6 hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-lg bg-[#0e111a]/90 backdrop-blur border border-white/10 shadow-lg text-[11px] font-mono text-slate-300">
               <i class="fa-solid fa-code text-sky-400"></i>
               <span>Page Object Model (POM)</span>
             </div>
 
             <!-- Floating external tag 2 -->
-            <div class="absolute -bottom-4 -right-4 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#0e111a]/90 backdrop-blur border border-white/10 shadow-lg text-[11px] font-mono text-slate-300">
+            <div
+              class="absolute -bottom-4 -right-4 hidden sm:flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-[#0e111a]/90 backdrop-blur border border-white/10 shadow-lg text-[11px] font-mono text-slate-300">
               <i class="fa-solid fa-shield-halved text-emerald-400"></i>
               <span>Cross-Browser CI/CD</span>
             </div>
@@ -309,7 +356,8 @@
     </section>
 
     <div class="w-full py-8 border-y border-white/[0.06] bg-white/[0.01] overflow-hidden my-16 select-none">
-      <div class="animate-ticker flex items-center space-x-8 font-mono text-xs md:text-sm font-medium tracking-[0.3em] text-slate-400 uppercase">
+      <div
+        class="animate-ticker flex items-center space-x-8 font-mono text-xs md:text-sm font-medium tracking-[0.3em] text-slate-400 uppercase">
         <span class="flex items-center gap-6">
           <span class="text-sky-400 font-bold">*</span> PLAYWRIGHT TEST SUITES
           <span class="text-sky-400 font-bold">*</span> SELENIUM WEBDRIVER
@@ -333,7 +381,7 @@
 
     <section id="about" class="px-5 md:px-12 max-w-7xl mx-auto py-16 scroll-mt-24">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
-        
+
         <div class="lg:col-span-4">
           <div class="sticky top-28 space-y-4">
             <span class="font-mono text-xs text-sky-400 tracking-widest uppercase">[ ABOUT ME ]</span>
@@ -341,10 +389,12 @@
               Precision-driven verification for high-stake software systems.
             </h2>
             <p class="text-slate-400 text-sm leading-relaxed">
-              Bridging programming depth in Python, Java & SQL with systematic boundary-value analysis to intercept bugs before deployment.
+              Bridging programming depth in Python, Java & SQL with systematic boundary-value analysis to intercept bugs
+              before deployment.
             </p>
             <div class="pt-4">
-              <a href="mailto:jegadeesh8220@gmail.com" class="inline-flex items-center gap-2 text-xs font-mono text-sky-400 hover:text-white transition-colors">
+              <a href="mailto:jegadeesh8220@gmail.com"
+                class="inline-flex items-center gap-2 text-xs font-mono text-sky-400 hover:text-white transition-colors">
                 <span>jegadeesh8220@gmail.com</span>
                 <i class="fa-solid fa-arrow-right text-[10px]"></i>
               </a>
@@ -355,13 +405,19 @@
         <div class="lg:col-span-8 space-y-8">
           <!-- Bio Narrative Cards -->
           <div class="p-8 rounded-2xl bg-[#0c0e14] border border-white/[0.08] relative overflow-hidden group">
-            <div class="absolute -right-16 -top-16 w-48 h-48 bg-sky-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-sky-500/20 transition-all duration-500"></div>
+            <div
+              class="absolute -right-16 -top-16 w-48 h-48 bg-sky-500/10 rounded-full blur-3xl pointer-events-none group-hover:bg-sky-500/20 transition-all duration-500">
+            </div>
             <h3 class="font-display font-bold text-xl text-white mb-3">Professional Summary</h3>
             <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-6 font-light">
-              Detail-oriented and analytical <strong class="text-white">QA Automation Tester</strong> holding an MCA and B.Sc. in Computer Science. I combine strong programming foundations in Python, Java, and SQL with hands-on expertise in modern web automation frameworks like Playwright and Selenium WebDriver.
+              Detail-oriented and analytical <strong class="text-white">QA Automation Tester</strong> holding an MCA and
+              B.Sc. in Computer Science. I combine strong programming foundations in Python, Java, and SQL with hands-on
+              expertise in modern web automation frameworks like Playwright and Selenium WebDriver.
             </p>
             <p class="text-slate-300 text-sm sm:text-base leading-relaxed font-light">
-              With a proven background in systematic data verification, root-cause discrepancy analysis, and operational audit reconciliation, I specialize in designing comprehensive test cases, automating cross-browser regression suites, and tracking defects across the full Software Testing Life Cycle (STLC).
+              With a proven background in systematic data verification, root-cause discrepancy analysis, and operational
+              audit reconciliation, I specialize in designing comprehensive test cases, automating cross-browser
+              regression suites, and tracking defects across the full Software Testing Life Cycle (STLC).
             </p>
 
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 pt-8 mt-6 border-t border-white/[0.06]">
@@ -382,23 +438,28 @@
 
           <!-- Highlight Pillars -->
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/20 transition-all">
+            <div
+              class="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/20 transition-all">
               <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center mb-4">
                 <i class="fa-solid fa-microchip"></i>
               </div>
               <h4 class="text-white font-display font-semibold text-base mb-2">Auto-Waiting & Non-Flaky Runs</h4>
               <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                Utilizing Playwright's smart event locators and explicit condition polling to eliminate false test failures caused by async DOM re-renders and network latency.
+                Utilizing Playwright's smart event locators and explicit condition polling to eliminate false test
+                failures caused by async DOM re-renders and network latency.
               </p>
             </div>
 
-            <div class="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/20 transition-all">
-              <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4">
+            <div
+              class="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.06] hover:border-white/20 transition-all">
+              <div
+                class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center mb-4">
                 <i class="fa-solid fa-database"></i>
               </div>
               <h4 class="text-white font-display font-semibold text-base mb-2">Back-End & DB Assertions</h4>
               <p class="text-slate-400 text-xs sm:text-sm leading-relaxed">
-                Writing direct SQL join verification queries against transaction stores combined with Postman schema validations to guarantee end-to-end data integrity.
+                Writing direct SQL join verification queries against transaction stores combined with Postman schema
+                validations to guarantee end-to-end data integrity.
               </p>
             </div>
           </div>
@@ -421,16 +482,22 @@
       </div>
 
       <div class="space-y-8">
-        
+
         <!-- Project 1: Modern E-Commerce Test Automation Suite -->
-        <div class="tilt-card p-6 md:p-10 rounded-3xl bg-[#0b0d14] border border-white/[0.08] hover:border-sky-400/40 relative overflow-hidden transition-all duration-300">
+        <div
+          class="tilt-card p-6 md:p-10 rounded-3xl bg-[#0b0d14] border border-white/[0.08] hover:border-sky-400/40 relative overflow-hidden transition-all duration-300">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
+
             <div class="lg:col-span-7 space-y-4">
               <div class="flex flex-wrap items-center gap-2">
-                <span class="px-2.5 py-1 rounded bg-sky-500/15 border border-sky-400/30 text-[11px] font-mono text-sky-300">PLAYWRIGHT</span>
-                <span class="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10 text-[11px] font-mono text-slate-300">PYTHON / PYTEST</span>
-                <span class="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10 text-[11px] font-mono text-slate-300">PAGE OBJECT MODEL</span>
+                <span
+                  class="px-2.5 py-1 rounded bg-sky-500/15 border border-sky-400/30 text-[11px] font-mono text-sky-300">PLAYWRIGHT</span>
+                <span
+                  class="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10 text-[11px] font-mono text-slate-300">PYTHON
+                  / PYTEST</span>
+                <span
+                  class="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10 text-[11px] font-mono text-slate-300">PAGE
+                  OBJECT MODEL</span>
               </div>
 
               <h3 class="text-2xl sm:text-3xl font-display font-bold text-white hover:text-sky-300 transition-colors">
@@ -438,30 +505,37 @@
               </h3>
 
               <p class="text-slate-300 text-sm leading-relaxed font-light">
-                Architected a robust end-to-end (E2E) automation test framework using Playwright and PyTest. Leveraged auto-waiting mechanisms and smart selectors to eliminate flaky test runs across complex multi-step e-commerce operations.
+                Architected a robust end-to-end (E2E) automation test framework using Playwright and PyTest. Leveraged
+                auto-waiting mechanisms and smart selectors to eliminate flaky test runs across complex multi-step
+                e-commerce operations.
               </p>
 
               <ul class="space-y-2 text-xs text-slate-400 font-mono">
                 <li class="flex items-start gap-2">
                   <span class="text-sky-400 mt-0.5">▹</span>
-                  <span>Implemented <strong>Page Object Model (POM)</strong> pattern separating test assertions from UI locators, increasing long-term test maintenance efficiency by 40%.</span>
+                  <span>Implemented <strong>Page Object Model (POM)</strong> pattern separating test assertions from UI
+                    locators, increasing long-term test maintenance efficiency by 40%.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-sky-400 mt-0.5">▹</span>
-                  <span>Automated multi-stage checkout flows, payment gateway validation, and dynamic search filter tests simultaneously across Chromium, WebKit, and Firefox engines.</span>
+                  <span>Automated multi-stage checkout flows, payment gateway validation, and dynamic search filter
+                    tests simultaneously across Chromium, WebKit, and Firefox engines.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-sky-400 mt-0.5">▹</span>
-                  <span>Integrated <strong>Playwright Trace Viewer</strong> and headless video captures to isolate network waterfall errors and rapid defect triage in minutes.</span>
+                  <span>Integrated <strong>Playwright Trace Viewer</strong> and headless video captures to isolate
+                    network waterfall errors and rapid defect triage in minutes.</span>
                 </li>
               </ul>
 
               <div class="pt-4 flex items-center gap-4">
-                <button onclick="runSimulatedTest('playwright')" class="px-4 py-2 rounded-lg bg-sky-500/20 hover:bg-sky-400 hover:text-black border border-sky-400/40 text-sky-300 font-mono text-xs transition-colors flex items-center gap-2">
+                <button onclick="runSimulatedTest('playwright')"
+                  class="px-4 py-2 rounded-lg bg-sky-500/20 hover:bg-sky-400 hover:text-black border border-sky-400/40 text-sky-300 font-mono text-xs transition-colors flex items-center gap-2">
                   <i class="fa-solid fa-play text-[10px]"></i>
                   <span>Execute Playwright Suite</span>
                 </button>
-                <a href="https://github.com/JegadeeshR" target="_blank" class="text-xs font-mono text-slate-400 hover:text-white flex items-center gap-1.5 transition-colors">
+                <a href="https://github.com/JegadeeshR" target="_blank"
+                  class="text-xs font-mono text-slate-400 hover:text-white flex items-center gap-1.5 transition-colors">
                   <span>View Repository</span>
                   <i class="fa-brands fa-github"></i>
                 </a>
@@ -470,7 +544,8 @@
 
             <!-- Terminal Mockup preview for Project 1 -->
             <div class="lg:col-span-5">
-              <div class="terminal-screen rounded-xl border border-white/10 p-4 font-mono text-[11px] leading-relaxed overflow-hidden">
+              <div
+                class="terminal-screen rounded-xl border border-white/10 p-4 font-mono text-[11px] leading-relaxed overflow-hidden">
                 <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-3 text-slate-400">
                   <div class="flex gap-1.5">
                     <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
@@ -482,10 +557,14 @@
                 <div class="text-slate-400">
                   <p class="text-sky-400">$ pytest tests/e2e/test_checkout.py</p>
                   <p class="text-slate-500">collected 8 items</p>
-                  <p class="text-emerald-400 mt-2">✓ test_cart_item_addition <span class="text-slate-600">[Chromium]</span> (1.12s)</p>
-                  <p class="text-emerald-400">✓ test_promo_code_discount <span class="text-slate-600">[Firefox]</span> (0.84s)</p>
-                  <p class="text-emerald-400">✓ test_stripe_mock_payment <span class="text-slate-600">[WebKit]</span> (1.43s)</p>
-                  <p class="text-emerald-400">✓ test_guest_checkout_modal <span class="text-slate-600">[Chromium]</span> (0.91s)</p>
+                  <p class="text-emerald-400 mt-2">✓ test_cart_item_addition <span
+                      class="text-slate-600">[Chromium]</span> (1.12s)</p>
+                  <p class="text-emerald-400">✓ test_promo_code_discount <span class="text-slate-600">[Firefox]</span>
+                    (0.84s)</p>
+                  <p class="text-emerald-400">✓ test_stripe_mock_payment <span class="text-slate-600">[WebKit]</span>
+                    (1.43s)</p>
+                  <p class="text-emerald-400">✓ test_guest_checkout_modal <span class="text-slate-600">[Chromium]</span>
+                    (0.91s)</p>
                   <div class="mt-3 pt-2 border-t border-white/5 flex items-center justify-between text-[10px]">
                     <span class="text-emerald-300 font-semibold">8 passed in 4.30s (100%)</span>
                     <span class="text-slate-500">Trace Viewer: Recorded</span>
@@ -498,46 +577,60 @@
         </div>
 
         <!-- Project 2: Cross-Browser Regression Framework -->
-        <div class="tilt-card p-6 md:p-10 rounded-3xl bg-[#0b0d14] border border-white/[0.08] hover:border-emerald-400/40 relative overflow-hidden transition-all duration-300">
+        <div
+          class="tilt-card p-6 md:p-10 rounded-3xl bg-[#0b0d14] border border-white/[0.08] hover:border-emerald-400/40 relative overflow-hidden transition-all duration-300">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
+
             <div class="lg:col-span-7 space-y-4">
               <div class="flex flex-wrap items-center gap-2">
-                <span class="px-2.5 py-1 rounded bg-emerald-500/15 border border-emerald-400/30 text-[11px] font-mono text-emerald-300">SELENIUM WEBDRIVER</span>
-                <span class="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10 text-[11px] font-mono text-slate-300">JAVA</span>
-                <span class="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10 text-[11px] font-mono text-slate-300">TESTNG</span>
-                <span class="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10 text-[11px] font-mono text-slate-300">JIRA INTEGRATION</span>
+                <span
+                  class="px-2.5 py-1 rounded bg-emerald-500/15 border border-emerald-400/30 text-[11px] font-mono text-emerald-300">SELENIUM
+                  WEBDRIVER</span>
+                <span
+                  class="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10 text-[11px] font-mono text-slate-300">JAVA</span>
+                <span
+                  class="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10 text-[11px] font-mono text-slate-300">TESTNG</span>
+                <span
+                  class="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10 text-[11px] font-mono text-slate-300">JIRA
+                  INTEGRATION</span>
               </div>
 
-              <h3 class="text-2xl sm:text-3xl font-display font-bold text-white hover:text-emerald-300 transition-colors">
+              <h3
+                class="text-2xl sm:text-3xl font-display font-bold text-white hover:text-emerald-300 transition-colors">
                 Cross-Browser Regression Framework
               </h3>
 
               <p class="text-slate-300 text-sm leading-relaxed font-light">
-                Developed an enterprise-ready automated regression test suite using Selenium WebDriver, Java, and TestNG annotations. Executed parameter-driven tests against comprehensive datasets to validate edge behaviors.
+                Developed an enterprise-ready automated regression test suite using Selenium WebDriver, Java, and TestNG
+                annotations. Executed parameter-driven tests against comprehensive datasets to validate edge behaviors.
               </p>
 
               <ul class="space-y-2 text-xs text-slate-400 font-mono">
                 <li class="flex items-start gap-2">
                   <span class="text-emerald-400 mt-0.5">▹</span>
-                  <span>Configured robust explicit waits and customized XPath / CSS selectors to gracefully handle asynchronously populated UI components without arbitrary sleep timeouts.</span>
+                  <span>Configured robust explicit waits and customized XPath / CSS selectors to gracefully handle
+                    asynchronously populated UI components without arbitrary sleep timeouts.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-emerald-400 mt-0.5">▹</span>
-                  <span>Automated the generation of rich HTML execution reports with screenshots on failure; logged defect tickets directly into JIRA with exact reproduction steps.</span>
+                  <span>Automated the generation of rich HTML execution reports with screenshots on failure; logged
+                    defect tickets directly into JIRA with exact reproduction steps.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-emerald-400 mt-0.5">▹</span>
-                  <span>Conducted sanity and smoke test passes on staging environments prior to critical release sprints.</span>
+                  <span>Conducted sanity and smoke test passes on staging environments prior to critical release
+                    sprints.</span>
                 </li>
               </ul>
 
               <div class="pt-4 flex items-center gap-4">
-                <button onclick="runSimulatedTest('selenium')" class="px-4 py-2 rounded-lg bg-emerald-500/20 hover:bg-emerald-400 hover:text-black border border-emerald-400/40 text-emerald-300 font-mono text-xs transition-colors flex items-center gap-2">
+                <button onclick="runSimulatedTest('selenium')"
+                  class="px-4 py-2 rounded-lg bg-emerald-500/20 hover:bg-emerald-400 hover:text-black border border-emerald-400/40 text-emerald-300 font-mono text-xs transition-colors flex items-center gap-2">
                   <i class="fa-solid fa-play text-[10px]"></i>
                   <span>Execute Selenium Suite</span>
                 </button>
-                <a href="https://github.com/JegadeeshR" target="_blank" class="text-xs font-mono text-slate-400 hover:text-white flex items-center gap-1.5 transition-colors">
+                <a href="https://github.com/JegadeeshR" target="_blank"
+                  class="text-xs font-mono text-slate-400 hover:text-white flex items-center gap-1.5 transition-colors">
                   <span>View Repository</span>
                   <i class="fa-brands fa-github"></i>
                 </a>
@@ -546,7 +639,8 @@
 
             <!-- Terminal Mockup preview for Project 2 -->
             <div class="lg:col-span-5">
-              <div class="terminal-screen rounded-xl border border-white/10 p-4 font-mono text-[11px] leading-relaxed overflow-hidden">
+              <div
+                class="terminal-screen rounded-xl border border-white/10 p-4 font-mono text-[11px] leading-relaxed overflow-hidden">
                 <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-3 text-slate-400">
                   <div class="flex gap-1.5">
                     <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
@@ -573,45 +667,60 @@
         </div>
 
         <!-- Project 3: Back-End & Database Validation Suite -->
-        <div class="tilt-card p-6 md:p-10 rounded-3xl bg-[#0b0d14] border border-white/[0.08] hover:border-violet-400/40 relative overflow-hidden transition-all duration-300">
+        <div
+          class="tilt-card p-6 md:p-10 rounded-3xl bg-[#0b0d14] border border-white/[0.08] hover:border-violet-400/40 relative overflow-hidden transition-all duration-300">
           <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-            
+
             <div class="lg:col-span-7 space-y-4">
               <div class="flex flex-wrap items-center gap-2">
-                <span class="px-2.5 py-1 rounded bg-violet-500/15 border border-violet-400/30 text-[11px] font-mono text-violet-300">SQL VERIFICATION</span>
-                <span class="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10 text-[11px] font-mono text-slate-300">POSTMAN REST APIS</span>
-                <span class="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10 text-[11px] font-mono text-slate-300">JSON SCHEMA ASSERTIONS</span>
+                <span
+                  class="px-2.5 py-1 rounded bg-violet-500/15 border border-violet-400/30 text-[11px] font-mono text-violet-300">SQL
+                  VERIFICATION</span>
+                <span
+                  class="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10 text-[11px] font-mono text-slate-300">POSTMAN
+                  REST APIS</span>
+                <span
+                  class="px-2.5 py-1 rounded bg-white/[0.05] border border-white/10 text-[11px] font-mono text-slate-300">JSON
+                  SCHEMA ASSERTIONS</span>
               </div>
 
-              <h3 class="text-2xl sm:text-3xl font-display font-bold text-white hover:text-violet-300 transition-colors">
+              <h3
+                class="text-2xl sm:text-3xl font-display font-bold text-white hover:text-violet-300 transition-colors">
                 Back-End & Database Validation Suite
               </h3>
 
               <p class="text-slate-300 text-sm leading-relaxed font-light">
-                Constructed high-precision SQL relational query validations and Postman API contract verification collections. Ensured client actions synchronously matched back-end ledger tables and transactional state integrity.
+                Constructed high-precision SQL relational query validations and Postman API contract verification
+                collections. Ensured client actions synchronously matched back-end ledger tables and transactional state
+                integrity.
               </p>
 
               <ul class="space-y-2 text-xs text-slate-400 font-mono">
                 <li class="flex items-start gap-2">
                   <span class="text-violet-400 mt-0.5">▹</span>
-                  <span>Authored multi-table SQL inner and left join queries to validate client checkout records against relational database schemas, preventing revenue discrepancies.</span>
+                  <span>Authored multi-table SQL inner and left join queries to validate client checkout records against
+                    relational database schemas, preventing revenue discrepancies.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-violet-400 mt-0.5">▹</span>
-                  <span>Configured automated REST API regression suites via Postman Newman runners, asserting HTTP response codes, headers, and strict JSON schemas.</span>
+                  <span>Configured automated REST API regression suites via Postman Newman runners, asserting HTTP
+                    response codes, headers, and strict JSON schemas.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-violet-400 mt-0.5">▹</span>
-                  <span>Tested API rate limits, error status handling (400/401/403/500), and boundary parameter payloads.</span>
+                  <span>Tested API rate limits, error status handling (400/401/403/500), and boundary parameter
+                    payloads.</span>
                 </li>
               </ul>
 
               <div class="pt-4 flex items-center gap-4">
-                <button onclick="runSimulatedTest('api')" class="px-4 py-2 rounded-lg bg-violet-500/20 hover:bg-violet-400 hover:text-black border border-violet-400/40 text-violet-300 font-mono text-xs transition-colors flex items-center gap-2">
+                <button onclick="runSimulatedTest('api')"
+                  class="px-4 py-2 rounded-lg bg-violet-500/20 hover:bg-violet-400 hover:text-black border border-violet-400/40 text-violet-300 font-mono text-xs transition-colors flex items-center gap-2">
                   <i class="fa-solid fa-play text-[10px]"></i>
                   <span>Run API & DB Checks</span>
                 </button>
-                <a href="https://github.com/JegadeeshR" target="_blank" class="text-xs font-mono text-slate-400 hover:text-white flex items-center gap-1.5 transition-colors">
+                <a href="https://github.com/JegadeeshR" target="_blank"
+                  class="text-xs font-mono text-slate-400 hover:text-white flex items-center gap-1.5 transition-colors">
                   <span>View Repository</span>
                   <i class="fa-brands fa-github"></i>
                 </a>
@@ -620,7 +729,8 @@
 
             <!-- Terminal Mockup preview for Project 3 -->
             <div class="lg:col-span-5">
-              <div class="terminal-screen rounded-xl border border-white/10 p-4 font-mono text-[11px] leading-relaxed overflow-hidden">
+              <div
+                class="terminal-screen rounded-xl border border-white/10 p-4 font-mono text-[11px] leading-relaxed overflow-hidden">
                 <div class="flex items-center justify-between pb-3 border-b border-white/10 mb-3 text-slate-400">
                   <div class="flex gap-1.5">
                     <span class="w-2.5 h-2.5 rounded-full bg-rose-500/80"></span>
@@ -651,34 +761,42 @@
 
     <section class="px-5 md:px-12 max-w-7xl mx-auto py-10">
       <div class="rounded-3xl border border-sky-500/30 bg-[#090b10] p-6 md:p-8 relative overflow-hidden shadow-2xl">
-        <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-white/10">
+        <div
+          class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4 pb-6 border-b border-white/10">
           <div>
             <div class="flex items-center gap-2 text-xs font-mono text-sky-400">
               <span class="w-2 h-2 rounded-full bg-sky-400 animate-ping"></span>
               <span>LIVE AUTOMATION TERMINAL RUNNER</span>
             </div>
-            <h3 class="text-xl md:text-2xl font-display font-bold text-white mt-1">Interactive Test Execution Engine</h3>
+            <h3 class="text-xl md:text-2xl font-display font-bold text-white mt-1">Interactive Test Execution Engine
+            </h3>
           </div>
           <div class="flex flex-wrap gap-2">
-            <button onclick="runSimulatedTest('playwright')" class="px-3.5 py-1.5 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 border border-sky-400/30 text-sky-300 font-mono text-xs transition">
+            <button onclick="runSimulatedTest('playwright')"
+              class="px-3.5 py-1.5 rounded-lg bg-sky-500/10 hover:bg-sky-500/20 border border-sky-400/30 text-sky-300 font-mono text-xs transition">
               Run Playwright
             </button>
-            <button onclick="runSimulatedTest('selenium')" class="px-3.5 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 font-mono text-xs transition">
+            <button onclick="runSimulatedTest('selenium')"
+              class="px-3.5 py-1.5 rounded-lg bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-400/30 text-emerald-300 font-mono text-xs transition">
               Run Selenium
             </button>
-            <button onclick="runSimulatedTest('api')" class="px-3.5 py-1.5 rounded-lg bg-violet-500/10 hover:bg-violet-500/20 border border-violet-400/30 text-violet-300 font-mono text-xs transition">
+            <button onclick="runSimulatedTest('api')"
+              class="px-3.5 py-1.5 rounded-lg bg-violet-500/10 hover:bg-violet-500/20 border border-violet-400/30 text-violet-300 font-mono text-xs transition">
               Run API / SQL
             </button>
-            <button onclick="clearTerminal()" class="px-3.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 font-mono text-xs transition">
+            <button onclick="clearTerminal()"
+              class="px-3.5 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-slate-400 font-mono text-xs transition">
               Clear
             </button>
           </div>
         </div>
 
         <!-- Terminal Output View -->
-        <div id="terminal-output" class="font-mono text-xs text-slate-300 bg-black/80 rounded-xl p-5 mt-6 h-64 overflow-y-auto space-y-2 border border-white/5">
+        <div id="terminal-output"
+          class="font-mono text-xs text-slate-300 bg-black/80 rounded-xl p-5 mt-6 h-64 overflow-y-auto space-y-2 border border-white/5">
           <p class="text-slate-500">// Welcome to Jegadeesh's Test Automation Pipeline.</p>
-          <p class="text-slate-500">// Click any of the run triggers above to simulate a live automated test suite execution.</p>
+          <p class="text-slate-500">// Click any of the run triggers above to simulate a live automated test suite
+            execution.</p>
           <p class="text-sky-400">> System Ready: Python 3.11, Playwright 1.42, Selenium 4.18, MySQL 8.0</p>
         </div>
       </div>
@@ -699,116 +817,169 @@
 
       <!-- Category Filter Tabs -->
       <div class="flex flex-wrap gap-2 mb-8">
-        <button onclick="filterSkills('all')" class="skill-tab-btn active px-4 py-2 rounded-full text-xs font-mono border border-sky-400 bg-sky-400 text-black transition-all">ALL SKILLS</button>
-        <button onclick="filterSkills('automation')" class="skill-tab-btn px-4 py-2 rounded-full text-xs font-mono border border-white/10 bg-white/[0.03] text-slate-300 hover:border-white/30 transition-all">AUTOMATION & TOOLS</button>
-        <button onclick="filterSkills('methodology')" class="skill-tab-btn px-4 py-2 rounded-full text-xs font-mono border border-white/10 bg-white/[0.03] text-slate-300 hover:border-white/30 transition-all">QA METHODOLOGIES</button>
-        <button onclick="filterSkills('languages')" class="skill-tab-btn px-4 py-2 rounded-full text-xs font-mono border border-white/10 bg-white/[0.03] text-slate-300 hover:border-white/30 transition-all">LANGUAGES & DB</button>
+        <button onclick="filterSkills('all')"
+          class="skill-tab-btn active px-4 py-2 rounded-full text-xs font-mono border border-sky-400 bg-sky-400 text-black transition-all">ALL
+          SKILLS</button>
+        <button onclick="filterSkills('automation')"
+          class="skill-tab-btn px-4 py-2 rounded-full text-xs font-mono border border-white/10 bg-white/[0.03] text-slate-300 hover:border-white/30 transition-all">AUTOMATION
+          & TOOLS</button>
+        <button onclick="filterSkills('methodology')"
+          class="skill-tab-btn px-4 py-2 rounded-full text-xs font-mono border border-white/10 bg-white/[0.03] text-slate-300 hover:border-white/30 transition-all">QA
+          METHODOLOGIES</button>
+        <button onclick="filterSkills('languages')"
+          class="skill-tab-btn px-4 py-2 rounded-full text-xs font-mono border border-white/10 bg-white/[0.03] text-slate-300 hover:border-white/30 transition-all">LANGUAGES
+          & DB</button>
       </div>
 
       <!-- Skills Grid -->
       <div id="skills-grid" class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3.5">
-        
+
         <!-- Skill 1 -->
-        <div class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group" data-category="automation">
-          <div class="text-sky-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-play"></i></div>
+        <div
+          class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group"
+          data-category="automation">
+          <div class="text-sky-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i
+              class="fa-solid fa-play"></i></div>
           <h4 class="font-display font-semibold text-sm text-white">Playwright</h4>
           <span class="text-[10px] font-mono text-slate-500 uppercase">E2E Framework / Trace Viewer</span>
         </div>
 
         <!-- Skill 2 -->
-        <div class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group" data-category="automation">
-          <div class="text-emerald-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-vial"></i></div>
+        <div
+          class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group"
+          data-category="automation">
+          <div class="text-emerald-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i
+              class="fa-solid fa-vial"></i></div>
           <h4 class="font-display font-semibold text-sm text-white">Selenium WebDriver</h4>
           <span class="text-[10px] font-mono text-slate-500 uppercase">Cross-Browser Automation</span>
         </div>
 
         <!-- Skill 3 -->
-        <div class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group" data-category="languages">
-          <div class="text-amber-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-brands fa-python"></i></div>
+        <div
+          class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group"
+          data-category="languages">
+          <div class="text-amber-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i
+              class="fa-brands fa-python"></i></div>
           <h4 class="font-display font-semibold text-sm text-white">Python</h4>
           <span class="text-[10px] font-mono text-slate-500 uppercase">PyTest / Scripting</span>
         </div>
 
         <!-- Skill 4 -->
-        <div class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group" data-category="languages">
-          <div class="text-rose-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-brands fa-java"></i></div>
+        <div
+          class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group"
+          data-category="languages">
+          <div class="text-rose-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i
+              class="fa-brands fa-java"></i></div>
           <h4 class="font-display font-semibold text-sm text-white">Java</h4>
           <span class="text-[10px] font-mono text-slate-500 uppercase">OOP & TestNG</span>
         </div>
 
         <!-- Skill 5 -->
-        <div class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group" data-category="languages">
-          <div class="text-sky-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-database"></i></div>
+        <div
+          class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group"
+          data-category="languages">
+          <div class="text-sky-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i
+              class="fa-solid fa-database"></i></div>
           <h4 class="font-display font-semibold text-sm text-white">SQL / MySQL</h4>
           <span class="text-[10px] font-mono text-slate-500 uppercase">Data Verification Queries</span>
         </div>
 
         <!-- Skill 6 -->
-        <div class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group" data-category="automation">
-          <div class="text-orange-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-paper-plane"></i></div>
+        <div
+          class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group"
+          data-category="automation">
+          <div class="text-orange-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i
+              class="fa-solid fa-paper-plane"></i></div>
           <h4 class="font-display font-semibold text-sm text-white">Postman</h4>
           <span class="text-[10px] font-mono text-slate-500 uppercase">REST API Assertions</span>
         </div>
 
         <!-- Skill 7 -->
-        <div class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group" data-category="automation">
-          <div class="text-indigo-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-layer-group"></i></div>
+        <div
+          class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group"
+          data-category="automation">
+          <div class="text-indigo-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i
+              class="fa-solid fa-layer-group"></i></div>
           <h4 class="font-display font-semibold text-sm text-white">Page Object Model</h4>
           <span class="text-[10px] font-mono text-slate-500 uppercase">POM Architecture</span>
         </div>
 
         <!-- Skill 8 -->
-        <div class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group" data-category="methodology">
-          <div class="text-teal-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-rotate"></i></div>
+        <div
+          class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group"
+          data-category="methodology">
+          <div class="text-teal-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i
+              class="fa-solid fa-rotate"></i></div>
           <h4 class="font-display font-semibold text-sm text-white">Regression & Smoke</h4>
           <span class="text-[10px] font-mono text-slate-500 uppercase">Release Confidence</span>
         </div>
 
         <!-- Skill 9 -->
-        <div class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group" data-category="methodology">
-          <div class="text-sky-300 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-bug"></i></div>
+        <div
+          class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group"
+          data-category="methodology">
+          <div class="text-sky-300 text-xl mb-2 group-hover:scale-110 transition-transform"><i
+              class="fa-solid fa-bug"></i></div>
           <h4 class="font-display font-semibold text-sm text-white">STLC / Defect Lifecycle</h4>
           <span class="text-[10px] font-mono text-slate-500 uppercase">JIRA & Bug Tracking</span>
         </div>
 
         <!-- Skill 10 -->
-        <div class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group" data-category="methodology">
-          <div class="text-emerald-300 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-users-viewfinder"></i></div>
+        <div
+          class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group"
+          data-category="methodology">
+          <div class="text-emerald-300 text-xl mb-2 group-hover:scale-110 transition-transform"><i
+              class="fa-solid fa-users-viewfinder"></i></div>
           <h4 class="font-display font-semibold text-sm text-white">User Acceptance Testing</h4>
           <span class="text-[10px] font-mono text-slate-500 uppercase">UAT & Business Logic</span>
         </div>
 
         <!-- Skill 11 -->
-        <div class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group" data-category="automation">
-          <div class="text-purple-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-brands fa-git-alt"></i></div>
+        <div
+          class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group"
+          data-category="automation">
+          <div class="text-purple-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i
+              class="fa-brands fa-git-alt"></i></div>
           <h4 class="font-display font-semibold text-sm text-white">Git & GitHub</h4>
           <span class="text-[10px] font-mono text-slate-500 uppercase">Version Control</span>
         </div>
 
         <!-- Skill 12 -->
-        <div class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group" data-category="languages">
-          <div class="text-yellow-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-brands fa-js"></i></div>
+        <div
+          class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group"
+          data-category="languages">
+          <div class="text-yellow-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i
+              class="fa-brands fa-js"></i></div>
           <h4 class="font-display font-semibold text-sm text-white">JavaScript (Basics)</h4>
           <span class="text-[10px] font-mono text-slate-500 uppercase">DOM Manipulation & Async</span>
         </div>
 
         <!-- Skill 13 -->
-        <div class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group" data-category="automation">
-          <div class="text-blue-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-brands fa-jira"></i></div>
+        <div
+          class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group"
+          data-category="automation">
+          <div class="text-blue-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i
+              class="fa-brands fa-jira"></i></div>
           <h4 class="font-display font-semibold text-sm text-white">JIRA & Bugzilla</h4>
           <span class="text-[10px] font-mono text-slate-500 uppercase">Issue Tracking</span>
         </div>
 
         <!-- Skill 14 -->
-        <div class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group" data-category="methodology">
-          <div class="text-green-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-chart-line"></i></div>
+        <div
+          class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group"
+          data-category="methodology">
+          <div class="text-green-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i
+              class="fa-solid fa-chart-line"></i></div>
           <h4 class="font-display font-semibold text-sm text-white">Root Cause Analysis</h4>
           <span class="text-[10px] font-mono text-slate-500 uppercase">Data Aging & Audits</span>
         </div>
 
         <!-- Skill 15 -->
-        <div class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group" data-category="languages">
-          <div class="text-sky-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i class="fa-solid fa-code"></i></div>
+        <div
+          class="skill-card p-4 rounded-xl bg-[#0c0e14] border border-white/[0.06] hover:border-sky-400/40 transition group"
+          data-category="languages">
+          <div class="text-sky-400 text-xl mb-2 group-hover:scale-110 transition-transform"><i
+              class="fa-solid fa-code"></i></div>
           <h4 class="font-display font-semibold text-sm text-white">HTML5, CSS & XPath</h4>
           <span class="text-[10px] font-mono text-slate-500 uppercase">Dynamic DOM Locators</span>
         </div>
@@ -818,41 +989,48 @@
 
     <section id="experience" class="px-5 md:px-12 max-w-7xl mx-auto py-16 scroll-mt-24">
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-12">
-        
+
         <!-- Experience -->
         <div class="lg:col-span-7 space-y-6">
           <span class="font-mono text-xs text-sky-400 tracking-widest uppercase">[ WORK EXPERIENCE ]</span>
           <h3 class="text-3xl font-display font-bold text-white tracking-tight">Professional Track Record</h3>
-          
+
           <div class="space-y-6 pt-4">
-            
+
             <div class="p-6 rounded-2xl bg-[#0c0e14] border border-white/[0.08] relative">
               <div class="flex flex-wrap items-center justify-between gap-2 mb-2">
                 <h4 class="text-lg font-display font-bold text-white">Billing & Data Specialist</h4>
-                <span class="font-mono text-xs px-2.5 py-1 rounded bg-sky-500/15 text-sky-300 border border-sky-400/30">Chennai | Present</span>
+                <span
+                  class="font-mono text-xs px-2.5 py-1 rounded bg-sky-500/15 text-sky-300 border border-sky-400/30">Chennai
+                  | Present</span>
               </div>
               <p class="text-xs font-mono text-slate-400 mb-4">Operational Data Verification & Audit Reconciliation</p>
-              
+
               <ul class="space-y-2 text-xs text-slate-300 font-light leading-relaxed">
                 <li class="flex items-start gap-2">
                   <span class="text-sky-400">▹</span>
-                  <span>Analyzed and processed high-volume transport invoices, verifying freight rates, tax calculations, and vendor agreements against strict operational business rules.</span>
+                  <span>Analyzed and processed high-volume transport invoices, verifying freight rates, tax
+                    calculations, and vendor agreements against strict operational business rules.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-sky-400">▹</span>
-                  <span>Performed routine monthly aging analysis to identify billing anomalies, rate discrepancies, and reconciliation delays, reducing calculation errors significantly.</span>
+                  <span>Performed routine monthly aging analysis to identify billing anomalies, rate discrepancies, and
+                    reconciliation delays, reducing calculation errors significantly.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-sky-400">▹</span>
-                  <span>Conducted root-cause investigations on disputed customer accounts, documenting system computation anomalies and collaborating with operations to resolve issues.</span>
+                  <span>Conducted root-cause investigations on disputed customer accounts, documenting system
+                    computation anomalies and collaborating with operations to resolve issues.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-sky-400">▹</span>
-                  <span>Verified database records against digital shipping documents to maintain 100% data accuracy across operational software platforms.</span>
+                  <span>Verified database records against digital shipping documents to maintain 100% data accuracy
+                    across operational software platforms.</span>
                 </li>
                 <li class="flex items-start gap-2">
                   <span class="text-sky-400">▹</span>
-                  <span>Participated in User Acceptance Testing (UAT) for internal billing platform updates, executing test scenarios for invoice workflows and PDF report exports.</span>
+                  <span>Participated in User Acceptance Testing (UAT) for internal billing platform updates, executing
+                    test scenarios for invoice workflows and PDF report exports.</span>
                 </li>
               </ul>
             </div>
@@ -866,36 +1044,42 @@
           <h3 class="text-3xl font-display font-bold text-white tracking-tight">Education & Honors</h3>
 
           <div class="space-y-4 pt-4">
-            
+
             <!-- MCA -->
             <div class="p-5 rounded-2xl bg-[#0c0e14] border border-white/[0.08]">
               <div class="flex items-center justify-between mb-1">
-                <h4 class="font-display font-bold text-sm text-white">Master of Science in Computer Applications (MCA)</h4>
+                <h4 class="font-display font-bold text-sm text-white">Master of Science in Computer Applications (MCA)
+                </h4>
                 <span class="text-[10px] font-mono text-sky-400">Postgraduate</span>
               </div>
               <p class="text-xs text-slate-400">SVCCAM — Coimbatore, Tamil Nadu</p>
-              <p class="text-[11px] text-slate-500 mt-2 font-mono">Specialization: Advanced Computing, Software Engineering, Database Systems</p>
+              <p class="text-[11px] text-slate-500 mt-2 font-mono">Specialization: Advanced Computing, Software
+                Engineering, Database Systems</p>
             </div>
 
             <!-- B.Sc CS -->
             <div class="p-5 rounded-2xl bg-[#0c0e14] border border-white/[0.08]">
               <div class="flex items-center justify-between mb-1">
-                <h4 class="font-display font-bold text-sm text-white">Bachelor of Science in Computer Science (B.Sc. CS)</h4>
+                <h4 class="font-display font-bold text-sm text-white">Bachelor of Science in Computer Science (B.Sc. CS)
+                </h4>
                 <span class="text-[10px] font-mono text-emerald-400">Graduated: 2021</span>
               </div>
               <p class="text-xs text-slate-400">TKS College of Arts & Science — Theni, Tamil Nadu</p>
-              <p class="text-[11px] text-slate-500 mt-2 font-mono">Foundations: Data Structures, Algorithms, OOP, Relational Databases</p>
+              <p class="text-[11px] text-slate-500 mt-2 font-mono">Foundations: Data Structures, Algorithms, OOP,
+                Relational Databases</p>
             </div>
 
             <!-- Certification -->
-            <div class="p-5 rounded-2xl bg-gradient-to-br from-emerald-950/20 to-transparent border border-emerald-500/20">
+            <div
+              class="p-5 rounded-2xl bg-gradient-to-br from-emerald-950/20 to-transparent border border-emerald-500/20">
               <div class="flex items-center gap-2 mb-2 text-emerald-400 text-xs font-mono">
                 <i class="fa-solid fa-award text-sm"></i>
                 <span class="font-bold">FIRECROWD CERTIFIED TESTER</span>
               </div>
               <h4 class="font-display font-semibold text-sm text-white">Crowd Testing & Test Scenario Execution</h4>
               <p class="text-xs text-slate-400 mt-1.5 leading-relaxed">
-                Certified by FIRECROWD for excellence in deriving and executing complex test scenarios, proposing edge cases, and isolating critical defects across functional and non-functional aspects.
+                Certified by FIRECROWD for excellence in deriving and executing complex test scenarios, proposing edge
+                cases, and isolating critical defects across functional and non-functional aspects.
               </p>
             </div>
 
@@ -906,46 +1090,60 @@
     </section>
 
     <section id="contact" class="px-5 md:px-12 max-w-7xl mx-auto py-24 scroll-mt-24">
-      <div class="rounded-3xl bg-gradient-to-b from-[#0e111a] to-[#07080a] border border-white/10 p-8 sm:p-14 md:p-20 relative overflow-hidden text-center">
-        
+      <div
+        class="rounded-3xl bg-gradient-to-b from-[#0e111a] to-[#07080a] border border-white/10 p-8 sm:p-14 md:p-20 relative overflow-hidden text-center">
+
         <!-- Glow halo -->
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-sky-500/10 rounded-full blur-[100px] pointer-events-none"></div>
+        <div
+          class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[300px] bg-sky-500/10 rounded-full blur-[100px] pointer-events-none">
+        </div>
 
-        <span class="font-mono text-xs text-sky-400 tracking-[0.3em] uppercase block mb-4">[ INITIATE COLLABORATION ]</span>
+        <span class="font-mono text-xs text-sky-400 tracking-[0.3em] uppercase block mb-4">[ INITIATE COLLABORATION
+          ]</span>
 
-        <h2 class="text-3xl sm:text-5xl md:text-6xl font-display font-extrabold text-white tracking-tight max-w-4xl mx-auto leading-tight mb-8">
-          LET'S BUILD SOMETHING <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-emerald-300 to-indigo-400">RELIABLE</span> TOGETHER.
+        <h2
+          class="text-3xl sm:text-5xl md:text-6xl font-display font-extrabold text-white tracking-tight max-w-4xl mx-auto leading-tight mb-8">
+          LET'S BUILD SOMETHING <span
+            class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-emerald-300 to-indigo-400">RELIABLE</span>
+          TOGETHER.
         </h2>
 
         <p class="text-slate-400 text-sm sm:text-base max-w-xl mx-auto mb-10 font-light">
-          Whether you have an upcoming automation role, an existing QA suite requiring stabilization, or an enterprise release pipeline to verify — my inbox is always open.
+          Whether you have an upcoming automation role, an existing QA suite requiring stabilization, or an enterprise
+          release pipeline to verify — my inbox is always open.
         </p>
 
         <!-- Main Action Buttons -->
         <div class="flex flex-wrap items-center justify-center gap-4">
-          <a href="mailto:jegadeesh8220@gmail.com" class="px-8 py-4 rounded-full bg-white text-black font-semibold text-xs tracking-wider uppercase hover:bg-sky-400 hover:text-black transition-all duration-300 shadow-xl shadow-white/10 flex items-center gap-2">
+          <a href="mailto:jegadeesh8220@gmail.com"
+            class="px-8 py-4 rounded-full bg-white text-black font-semibold text-xs tracking-wider uppercase hover:bg-sky-400 hover:text-black transition-all duration-300 shadow-xl shadow-white/10 flex items-center gap-2">
             <i class="fa-solid fa-envelope"></i>
             <span>EMAIL JEGADEESH</span>
           </a>
 
-          <a href="tel:+916383034945" class="px-8 py-4 rounded-full bg-white/[0.05] border border-white/20 text-white font-mono text-xs tracking-wider uppercase hover:bg-white/[0.1] transition-all duration-300 flex items-center gap-2">
+          <a href="tel:+916383034945"
+            class="px-8 py-4 rounded-full bg-white/[0.05] border border-white/20 text-white font-mono text-xs tracking-wider uppercase hover:bg-white/[0.1] transition-all duration-300 flex items-center gap-2">
             <i class="fa-solid fa-phone"></i>
             <span>+91 6383034945</span>
           </a>
 
-          <button onclick="copyEmail()" id="copy-btn" class="px-6 py-4 rounded-full bg-white/[0.03] border border-white/10 text-slate-300 font-mono text-xs hover:text-white transition-all duration-300 flex items-center gap-2">
+          <button onclick="copyEmail()" id="copy-btn"
+            class="px-6 py-4 rounded-full bg-white/[0.03] border border-white/10 text-slate-300 font-mono text-xs hover:text-white transition-all duration-300 flex items-center gap-2">
             <i class="fa-solid fa-copy"></i>
             <span id="copy-text">COPY EMAIL</span>
           </button>
         </div>
 
         <!-- Social Channels -->
-        <div class="flex items-center justify-center gap-8 mt-14 pt-10 border-t border-white/[0.07] text-xs font-mono text-slate-400">
-          <a href="https://github.com/JegadeeshR" target="_blank" class="hover:text-white transition-colors flex items-center gap-2">
+        <div
+          class="flex items-center justify-center gap-8 mt-14 pt-10 border-t border-white/[0.07] text-xs font-mono text-slate-400">
+          <a href="https://github.com/JegadeeshR" target="_blank"
+            class="hover:text-white transition-colors flex items-center gap-2">
             <i class="fa-brands fa-github text-sm"></i>
             <span>GITHUB</span>
           </a>
-          <a href="https://www.linkedin.com/in/jegadeesh-kumar-2a8629221" target="_blank" class="hover:text-white transition-colors flex items-center gap-2">
+          <a href="https://www.linkedin.com/in/jegadeesh-kumar-2a8629221" target="_blank"
+            class="hover:text-white transition-colors flex items-center gap-2">
             <i class="fa-brands fa-linkedin text-sm"></i>
             <span>LINKEDIN</span>
           </a>
@@ -958,7 +1156,8 @@
       </div>
     </section>
 
-    <footer class="px-5 md:px-12 py-8 border-t border-white/[0.06] text-center text-xs font-mono text-slate-500 max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <footer
+      class="px-5 md:px-12 py-8 border-t border-white/[0.06] text-center text-xs font-mono text-slate-500 max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
       <div>
         © 2026 R JEGADEESH KUMAR — QA & TEST AUTOMATION ENGINEER
       </div>
@@ -1247,10 +1446,11 @@
     /* -------------------------------------------------------------
        7. Window Lifecycle Initialization
        ------------------------------------------------------------- */
-    window.onload = function() {
+    window.onload = function () {
       initThree();
       animateThree();
     };
   </script>
 </body>
+
 </html>
